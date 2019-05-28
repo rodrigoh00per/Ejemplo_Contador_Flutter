@@ -29,15 +29,54 @@ class _ContadorPageState extends State<ContadorPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          setState(() {
-            this._contador++;
-          });
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: this._crearBotones(),
     );
+  }
+
+  Widget _crearBotones() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(
+          width: 30,
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.exposure_zero), //este es el de resetear a 0
+          onPressed: this.reset,
+        ),
+        Expanded(
+          child: SizedBox(),
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: this.sumar,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.remove),
+          onPressed: this.restar,
+        ),
+        SizedBox(
+          width: 5,
+        ),
+      ],
+    );
+  }
+
+  void sumar() {
+    setState(() => this._contador++);
+  }
+
+  void restar() {
+    if (this._contador == 0) {
+    } else {
+      setState(() => this._contador--);
+    }
+  }
+
+  void reset() {
+    setState(() => this._contador = 0);
   }
 }
